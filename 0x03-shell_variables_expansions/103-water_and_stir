@@ -1,2 +1,2 @@
 #!/bin/bash
-printf "%d\n" $(( $(( $((water#$WATER)) + $((stir#$STIR)) )) ))
+printf "%x\n" $(( water#$WATER + stir#$STIR ))
