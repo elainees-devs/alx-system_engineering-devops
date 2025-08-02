@@ -1,2 +1,5 @@
 #!/bin/bash
-echo "{PATH//[^:]}" | wc -c
+echo "{PATH//[^:]}" | wc -c#!/bin/bash
+i=0; IFS=: read -ra p <<< "$PATH"
+for d in "${p[@]}"; do if [ -n "$d" ]; then i=$((i+1)); fi; done; echo $i
+
