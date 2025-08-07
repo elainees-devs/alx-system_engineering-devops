@@ -73,10 +73,48 @@ A high-availability, distributed setup to improve redundancy and scalability for
 
 ---
 
+## ✅ Task 2: Secured and Monitored Web Infrastructure
+
+A secure and monitored version of the distributed infrastructure for `www.foobar.com`.
+
+### 🔐 Security Additions:
+- **3 Firewalls**:
+  - On the Load Balancer: allows only HTTPS (443)
+  - On the Web Server: allows traffic from the LB only
+  - On the Application Server: allows traffic from Web Server only
+- **1 SSL Certificate**:
+  - Installed on the Load Balancer to enable HTTPS for encrypted traffic
+- **Purpose**: Prevent unauthorized access and ensure user data privacy
+
+### 📈 Monitoring Additions:
+- **3 Monitoring Clients** (e.g., Sumo Logic, Prometheus):
+  - Installed on Load Balancer, Web Server, and Application Server
+  - Collect metrics like CPU, memory, disk usage, QPS, HTTP errors
+- **Purpose**: Detect failures, performance bottlenecks, or intrusion attempts
+
+### 🔍 Monitoring QPS (Queries Per Second):
+- Enable and collect **Nginx/HAProxy logs**
+- Use monitoring client to extract and visualize request rates
+- Useful for auto-scaling triggers and performance dashboards
+
+### ⚠️ Infrastructure Issues:
+- **SSL Termination at Load Balancer**:
+  - Traffic from LB to Web/App is unencrypted unless re-encrypted
+  - Fix: Use SSL passthrough or mutual TLS for backend encryption
+- **Single MySQL Server**:
+  - If the master fails, no writes are possible
+  - Fix: Add a replica and implement automatic failover
+- **Servers with all components**:
+  - Hard to scale, insecure, resource contention
+  - Fix: Separate Web, App, and DB into dedicated roles and machines
+
+---
+
 ### 📁 Directory Structure:
 ```bash
 alx-system_engineering-devops/
 └── 0x09-web_infrastructure_design/
     ├── 0-simple_web_stack
     ├── 1-distributed_web_infrastructure
+    ├── 2-secured_and_monitored_web_infrastructure
     └── README.md
